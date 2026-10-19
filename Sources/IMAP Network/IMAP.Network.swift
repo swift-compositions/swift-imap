@@ -1,8 +1,8 @@
 #if canImport(Network)
-public import IMAP
+    public import IMAP
 
-extension IMAP {
+    extension IMAP {
 
-    public enum Network {}
-}
+        public enum Network {}
+    }
 #endif

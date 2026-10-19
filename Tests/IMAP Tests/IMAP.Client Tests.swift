@@ -52,12 +52,14 @@ struct `IMAP.Client Tests` {
 
             #expect(fetched.count == 1)
             #expect(fetched.first?.items == [.uid(4), .body(.whole, origin: nil, data: [Byte](utf8: "Subject"))])
-            #expect(script.sent == [
-                "A1 LOGIN me@example.com abcd-efgh\r\n",
-                "A2 EXAMINE INBOX\r\n",
-                "A3 UID SEARCH FROM example.nl\r\n",
-                "A4 UID FETCH 4 (UID BODY.PEEK[])\r\n",
-            ])
+            #expect(
+                script.sent == [
+                    "A1 LOGIN me@example.com abcd-efgh\r\n",
+                    "A2 EXAMINE INBOX\r\n",
+                    "A3 UID SEARCH FROM example.nl\r\n",
+                    "A4 UID FETCH 4 (UID BODY.PEEK[])\r\n",
+                ]
+            )
         }
 
         @Test

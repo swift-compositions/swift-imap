@@ -1,12 +1,12 @@
 #if canImport(Network)
-public import IMAP
-import Network
+    public import IMAP
+    import Network
 
-extension IMAP.Network {
+    extension IMAP.Network {
 
-    public struct Connection: Sendable {
+        public struct Connection: Sendable {
 
-        let connection: NWConnection
+            let connection: NWConnection
+        }
     }
-}
 #endif
