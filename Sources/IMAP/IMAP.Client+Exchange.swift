@@ -1,6 +1,5 @@
 import Byte
 public import RFC_3501
-import RFC_3501_Coder
 
 extension IMAP.Client {
 

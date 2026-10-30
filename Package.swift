@@ -23,8 +23,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/swift-atoms/swift-byte.git", branch: "main"),
-        .package(url: "https://github.com/swift-ietf/swift-rfc-3501.git", branch: "main"),
-        .package(url: "https://github.com/swift-ietf/swift-rfc-3501-coder.git", branch: "main"),
+        .package(url: "https://github.com/swift-ietf/swift-rfc-3501.git", branch: "main", traits: ["Coder"]),
     ],
     targets: [
         .target(
@@ -32,7 +31,6 @@ let package = Package(
             dependencies: [
                 .product(name: "Byte", package: "swift-byte"),
                 .product(name: "RFC 3501", package: "swift-rfc-3501"),
-                .product(name: "RFC 3501 Coder", package: "swift-rfc-3501-coder"),
             ]
         ),
         .target(
