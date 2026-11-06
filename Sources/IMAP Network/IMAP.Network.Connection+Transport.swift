@@ -10,8 +10,8 @@
 
     extension IMAP.Network.Connection: IMAP.Transport {
 
-        public static func connect(host: RFC_3986.URI.Host, port: UInt16 = 993) async throws(IMAP.Error) -> IMAP.Network.Connection {
-            guard let endpoint = NWEndpoint.Port(rawValue: port) else { throw .transport("invalid port \(port)") }
+        public static func connect(host: RFC_3986.URI.Host, port: RFC_3986.URI.Port = 993) async throws(IMAP.Error) -> IMAP.Network.Connection {
+            guard let endpoint = NWEndpoint.Port(rawValue: port.value) else { throw .transport("invalid port \(port)") }
             var text: [ASCII.Code] = []
             RFC_3986.URI.Host.Text().serialize(host, into: &text)
             let name = Swift.String(decoding: text.map(\.byte), as: UTF8.self)
