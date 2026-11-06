@@ -24,6 +24,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/swift-atoms/swift-byte.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-3501.git", branch: "main", traits: ["Coder"]),
+        .package(url: "https://github.com/swift-ietf/swift-rfc-3986.git", branch: "main", traits: ["Coder"]),
+        .package(url: "https://github.com/swift-atoms/swift-ascii.git", branch: "main"),
     ],
     targets: [
         .target(
@@ -37,7 +39,9 @@ let package = Package(
             name: "IMAP Network",
             dependencies: [
                 .target(name: "IMAP"),
+                .product(name: "ASCII", package: "swift-ascii"),
                 .product(name: "Byte", package: "swift-byte"),
+                .product(name: "RFC 3986", package: "swift-rfc-3986"),
             ]
         ),
         .testTarget(
@@ -53,6 +57,7 @@ let package = Package(
             dependencies: [
                 .target(name: "IMAP"),
                 .target(name: "IMAP Network"),
+                .product(name: "RFC 3986", package: "swift-rfc-3986"),
             ]
         ),
     ],

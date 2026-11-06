@@ -1,6 +1,8 @@
 #if canImport(Network)
+    import ASCII
     public import Byte
     public import IMAP
+    public import RFC_3986
     import Dispatch
     import Foundation
     import Network
@@ -8,9 +10,12 @@
 
     extension IMAP.Network.Connection: IMAP.Transport {
 
-        public static func connect(host: String, port: UInt16 = 993) async throws(IMAP.Error) -> IMAP.Network.Connection {
+        public static func connect(host: RFC_3986.URI.Host, port: UInt16 = 993) async throws(IMAP.Error) -> IMAP.Network.Connection {
             guard let endpoint = NWEndpoint.Port(rawValue: port) else { throw .transport("invalid port \(port)") }
-            let connection = NWConnection(host: NWEndpoint.Host(host), port: endpoint, using: .tls)
+            var text: [ASCII.Code] = []
+            RFC_3986.URI.Host.Text().serialize(host, into: &text)
+            let name = Swift.String(decoding: text.map(\.byte), as: UTF8.self)
+            let connection = NWConnection(host: NWEndpoint.Host(name), port: endpoint, using: .tls)
             let deadline = DispatchWorkItem { connection.cancel() }
             DispatchQueue.global().asyncAfter(deadline: .now() + 60, execute: deadline)
             defer { deadline.cancel() }
