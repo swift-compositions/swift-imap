@@ -1,5 +1,5 @@
-public import RFC_3501
 import Byte
+public import RFC_3501
 
 extension IMAP {
 
